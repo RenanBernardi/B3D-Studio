@@ -1,0 +1,32 @@
+.banner {
+  height: 400px;
+
+  background:
+    linear-gradient(
+      rgba(0,0,0,.7),
+      rgba(0,0,0,.7)
+    ),
+    url("https://images.unsplash.com/photo-1581092921461-eab62e97a780");
+
+  background-size: cover;
+
+  background-position: center;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  color: white;
+}
+
+.banner h1 {
+  font-size: 48px;
+}
+
+.banner p {
+  font-size: 20px;
+}

@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+.env
+venv/
+
+# PostgreSQL
+*.db
+
+# Node
+node_modules/
+dist/
+
+# VSCode
+.vscode/
+
+# uploads temporários
+uploads/*
