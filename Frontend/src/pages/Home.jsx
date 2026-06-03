@@ -45,12 +45,17 @@ export default function Home() {
                 >
                   Adicionar ao Carrinho
                 </button>
+                {produto.imagem ? (
               <img
                 src={produto.imagem}
                 alt={produto.nome}
                 className="imagem-produto"
               />
-
+                ):(
+                  <div className="imagem-produto">
+                    📦
+                  </div>
+                )}
               <h3>{produto.nome}</h3>
 
               <p>{produto.descricao}</p>
