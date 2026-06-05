@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { listarProdutos } from "../services/produtos";
-
+import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Banner from "../components/Banner";
 import {useContext} from "react";
@@ -71,6 +71,7 @@ export default function Home() {
         </div>
 
       </div>
+      <Footer />
     </>
   );
 }

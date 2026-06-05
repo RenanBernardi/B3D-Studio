@@ -1,41 +1,115 @@
 .header {
   height: 80px;
-
-  background: #111;
+  background: #111827;
 
   display: flex;
-
   justify-content: space-between;
-
   align-items: center;
 
-  padding: 0 40px;
+  padding: 0 50px;
 
-  box-shadow: 0 2px 10px rgba(0,0,0,.3);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
 .logo {
-  color: #0084ff;
+  display: flex;
+  align-items: center;
+}
 
-  font-size: 28px;
-
-  font-weight: bold;
+.logo img {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  transform: scale(1.03);
+  transition: 0.3s;
 }
 
 .header nav {
   display: flex;
-
-  gap: 25px;
+  align-items: center;
+  gap: 30px;
 }
 
 .header nav a {
-  color: white;
-
+  color: #f8fafc;
   text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
 
-  transition: .3s;
+  position: relative;
+
+  transition: 0.3s;
 }
 
 .header nav a:hover {
-  color: #0084ff;
+  color: #3b82f6;
+}
+
+.header nav a::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -6px;
+
+  width: 0;
+  height: 2px;
+
+  background: #3b82f6;
+
+  transition: 0.3s;
+}
+
+.header nav a:hover::after {
+  width: 100%;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .header {
+    padding: 0 20px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .header nav {
+    gap: 15px;
+  }
+
+  .header nav a {
+    font-size: 14px;
+  }
+  .carrinho-link {
+  position: relative;
+}
+
+.badge-carrinho {
+  position: absolute;
+
+  top: -10px;
+  right: -18px;
+
+  min-width: 20px;
+  height: 20px;
+
+  border-radius: 50%;
+
+  background: #ef4444;
+
+  color: white;
+
+  font-size: 12px;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 }

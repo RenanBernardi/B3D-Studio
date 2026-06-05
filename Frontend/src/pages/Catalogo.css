@@ -1,0 +1,15 @@
+.catalogo {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 50px 30px;
+}
+
+.catalogo h1 {
+  text-align: center;
+
+  font-size: 38px;
+
+  color: #111827;
+
+  margin-bottom: 40px;
+}

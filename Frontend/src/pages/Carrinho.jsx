@@ -1,10 +1,18 @@
 import { useContext } from "react";
-import { CarrinhoContext } from "../context/CarrinhoContext";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+
+import { CarrinhoContext }
+from "../context/CarrinhoContext";
+
+import "./Carrinho.css";
 
 export default function Carrinho() {
 
-  const {itens, removerProduto} = useContext(CarrinhoContext);
-    console.log("Itens no carrinho:", itens);
+  const {
+    itens,
+    removerProduto
+  } = useContext(CarrinhoContext);
 
   const total = itens.reduce(
     (acc, item) =>
@@ -14,104 +22,123 @@ export default function Carrinho() {
 
   function enviarWhatsApp() {
 
-    if (itens.length === 0) {
-      alert("Seu carrinho está vazio.");
-      return;
-    }
-
-    const numero = "5549999059509"; // ALTERE PARA O SEU NÚMERO
-
-    let mensagem = "Olá B3D Studio!\n\n";
-
-    mensagem += "Gostaria de solicitar:\n\n";
+    let mensagem =
+      "Olá! Gostaria de solicitar:\n\n";
 
     itens.forEach(item => {
 
       mensagem +=
-        `• ${item.nome} (${item.quantidade}x) - R$ ${(item.preco * item.quantidade).toFixed(2)}\n`;
+        `• ${item.nome}\n`;
+
+      mensagem +=
+        `Qtd: ${item.quantidade}\n`;
+
+      mensagem +=
+        `Valor: R$ ${item.preco}\n\n`;
 
     });
 
-    mensagem += "\n";
+    mensagem +=
+      `Total: R$ ${total.toFixed(2)}`;
 
-    mensagem += `Total: R$ ${total.toFixed(2)}`;
+    const telefone =
+      "5541999999999";
 
-    const url =
-      `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
-
-    window.open(url, "_blank");
+    window.open(
+      `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`,
+      "_blank"
+    );
   }
 
   return (
+    <>
+      <Header />
 
-    <div style={{ padding: "30px" }}>
+      <div className="carrinho-container">
 
-      <h1>Meu Carrinho</h1>
+        <h1>Meu Carrinho</h1>
 
-      {itens.length === 0 ? (
+        {itens.length === 0 ? (
 
-        <p>Seu carrinho está vazio.</p>
+          <div className="carrinho-vazio">
+            Seu carrinho está vazio.
+          </div>
 
-      ) : (
+        ) : (
 
-        <>
-          {itens.map(item => (
+          <>
+            <div className="carrinho-grid">
 
-            <div
-              key={item.id}
-              style={{
-                border: "1px solid #ccc",
-                padding: "15px",
-                marginBottom: "15px",
-                borderRadius: "8px"
-              }}
-            >
+              {itens.map(item => (
 
-              <h3>{item.nome}</h3>
+                <div
+                  className="item-carrinho"
+                  key={item.id}
+                >
+                  <div className="item-esquerda">
+                    <img
+                      src={item.imagem}
+                      alt={item.nome}
+                      className="imagem-item"
+                    />
+                  </div>
+                  <div className="item-imagem-placeholder">
+                    📦
+                  </div>
 
-              <p>
-                Quantidade: {item.quantidade}
-              </p>
+                  <div className="item-info">
 
-              <p>
-                Preço Unitário: R$ {item.preco.toFixed(2)}
-              </p>
+                    <h3>{item.nome}</h3>
 
-              <p>
-                Subtotal: R$ {(item.preco * item.quantidade).toFixed(2)}
-              </p>
+                    <p>
+                      Quantidade:
+                      {" "}
+                      {item.quantidade}
+                    </p>
+
+                    <span className="item-preco">
+                      R$ {item.preco.toFixed(2)}
+                    </span>
+
+                  </div>
+
+                  <button
+                    className="btn-remover"
+                    onClick={() =>
+                      removerProduto(item.id)
+                    }
+                  >
+                    Remover
+                  </button>
+
+                </div>
+
+              ))}
+
+            </div>
+
+            <div className="total-box">
+
+              <h2>
+                Total:
+                {" "}
+                R$ {total.toFixed(2)}
+              </h2>
 
               <button
-                onClick={() =>
-                  removerProduto(item.id)
-                }
+                className="btn-whatsapp"
+                onClick={enviarWhatsApp}
               >
-                Remover
+                Finalizar via WhatsApp
               </button>
 
             </div>
 
-          ))}
+          </>
+        )}
 
-          <h2>
-            Total: R$ {total.toFixed(2)}
-          </h2>
-
-          <button
-            onClick={enviarWhatsApp}
-            style={{
-              padding: "12px 20px",
-              cursor: "pointer"
-            }}
-          >
-            Finalizar Compra via WhatsApp
-          </button>
-
-        </>
-
-      )}
-
-    </div>
-
+      </div>
+      <Footer />
+      </>
   );
 }
