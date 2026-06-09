@@ -10,7 +10,7 @@ import "./Home.css";
 export default function Home() {
 
   const [produtos, setProdutos] = useState([]);
-
+  const [categoriaSelecionada,setCategoriaSelecionada] = useState("null");
   const { adicionarProduto } = useContext(CarrinhoContext);
 
   useEffect(() => {
@@ -29,14 +29,56 @@ export default function Home() {
       <Header />
 
       <Banner />
+<section className="categorias-home">
 
+  <h2>Categorias</h2>
+
+  <div className="categorias-grid">
+
+    <div className="categoria-card"
+      onclick={() => setCategoriaSelecionada(1)}
+      >
+      🎮
+      <span>Games</span>
+    </div>
+
+    <div className="categoria-card"
+      onclick={() => setCategoriaSelecionada(2)}
+      >
+      🏠
+      <span>Decoração</span>
+    </div>
+
+    <div className="categoria-card"
+      onclick={() => setCategoriaSelecionada(3)}
+      >
+      🧰
+      <span>Organização</span>
+    </div>
+
+    <div className="categoria-card"
+      onclick={() => setCategoriaSelecionada(4)}
+      >
+      ✨
+      <span>Personalizados</span>
+    </div>
+    
+
+  </div>
+
+</section>
       <div className="home">
 
         <h2>Produtos em Destaque</h2>
 
         <div className="produtos-grid">
 
-          {produtos.map(produto => (
+          {produtos.filter(produto => {
+            if (categoriaSelecionada === null) {
+              return true;
+            }
+            return produto.categoriaId === categoriaSelecionada;
+          }).map(produto => (
 
             <div className="card-produto" key={produto.id}>
                 <button
